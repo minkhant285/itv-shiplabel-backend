@@ -26,6 +26,12 @@ export class CustomerService {
             .getMany();
     }
 
+    async selectCustomerByPhone(phone: string): Promise<ICustomer[] | []> {
+        return await this.customerRepository.createQueryBuilder('customers')
+            .where("customers.phone like :phone", { phone: `%${phone}%` })
+            .getMany();
+    }
+
     async createCustomer(customerData: ICustomer): Promise<ICustomer> {
         return await this.customerRepository.save(customerData);
     }

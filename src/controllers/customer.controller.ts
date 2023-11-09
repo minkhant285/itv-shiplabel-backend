@@ -32,6 +32,15 @@ const getCustomerByName = async (req: Request, res: Response) => {
     });
 };
 
+const getCustomerByPhone = async (req: Request, res: Response) => {
+    let phone: string = req.params.phone;
+    let user: ICustomer[] | null = await customerService.selectCustomerByPhone(phone);
+    return res.status(200).json({
+        data: user,
+        status: res.statusCode
+    });
+};
+
 
 // updating a user
 const updateCustomer = async (req: Request, res: Response) => {
@@ -72,4 +81,4 @@ const addCustomer = async (req: Request, res: Response) => {
     });
 };
 
-export default { getCustomer: getCustomerById, getAllCustomers, addCustomer, deleteCustomer, updateCustomer, getCustomerByName };
+export default { getCustomer: getCustomerById, getAllCustomers, addCustomer, deleteCustomer, updateCustomer, getCustomerByName, getCustomerByPhone };
