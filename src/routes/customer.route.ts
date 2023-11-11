@@ -4,6 +4,7 @@ import controller from '../controllers/customer.controller';
 const router = express.Router();
 
 router.get('/customers', controller.getAllCustomers);
+router.get('/customers/:take/:skip', controller.getAllCustomers);
 router.get('/customer/:id', controller.getCustomer);
 router.get('/customer/s/:name', controller.getCustomerByName);
 router.get('/customer/s/p/:phone', controller.getCustomerByPhone);

@@ -10,9 +10,14 @@ export class CustomerService {
         this.customerRepository = AppDataSource.getRepository(Customer)
     }
 
-    async selectCustomers(): Promise<ICustomer[]> {
-        let res = await this.customerRepository.find();
-        return res;
+    async selectCustomers(query: { take: number, skip: number }): Promise<{ customers: ICustomer[], totalCus: number }> {
+        let res = await this.customerRepository.find({ take: query.take, skip: query.skip, order: { created_at: 'DESC' } });
+        let totalCus: number = await this.customerRepository.count();
+
+        return {
+            customers: res,
+            totalCus
+        };
         // return new Promise(resolve => setTimeout(resolve, 1000, res));
     }
 

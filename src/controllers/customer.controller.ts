@@ -4,9 +4,17 @@ import { ICustomer, ICustomerInput } from '../models/customer.model';
 
 let customerService = new CustomerService();
 
+interface PaginationQuery {
+    take: number;
+    skip: number;
+}
+
 //get all users
 const getAllCustomers = async (req: Request, res: Response) => {
-    let users: ICustomer[] = await customerService.selectCustomers();
+    let take: number = Number.parseInt(req.params.take);
+    let skip: number = Number.parseInt(req.params.skip);
+    let d: PaginationQuery = { take: take, skip: skip };
+    let users: { customers: ICustomer[], totalCus: number } = await customerService.selectCustomers(d);
     return res.status(200).json({
         data: users,
         status: res.statusCode
