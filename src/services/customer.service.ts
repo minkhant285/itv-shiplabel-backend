@@ -1,7 +1,7 @@
 import { AppDataSource } from "../db/data-source";
 import { Customer } from "../db/entities/customer.entity";
 import { ICustomer } from "../models/customer.model";
-import { Repository, UpdateResult, DeleteResult } from "typeorm";
+import { Repository, UpdateResult, DeleteResult, ILike } from "typeorm";
 
 export class CustomerService {
     private customerRepository: Repository<Customer>;
